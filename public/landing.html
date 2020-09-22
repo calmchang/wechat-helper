@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html style="font-size: 14px">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"
+    />
+    <title></title>
+    <!-- <link rel="stylesheet" type="text/css" href="lib/css/index.css" /> -->
+    <script src="./node_modules/wechat-helper/lib/index.js"></script>
+    <!-- <script src="./lib/index.js"></script> -->
+    <script src="./node_modules/axios/dist/axios.min.js"></script>
+
+  </head>
+  <body>
+    <div id="btnOk">点击确认</div>
+
+    <script>
+      window.onload = () => {
+        document.querySelector('#btnOk').onclick = () => {
+          var helper = new window.WechatHelper.default({ appId: 'wx054de4175bc8fdc2' });
+          helper.initJsApi({
+            
+          })
+          
+        };
+      };
+    </script>
+  </body>
+</html>

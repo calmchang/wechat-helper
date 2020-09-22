@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html style="font-size: 14px">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"
+    />
+    <title></title>
+    <!-- <link rel="stylesheet" type="text/css" href="lib/css/index.css" /> -->
+    <script src="./node_modules/wechat-helper/lib/index.js"></script>
+    <!-- <script src="./lib/index.js"></script> -->
+    <script src="./node_modules/axios/dist/axios.min.js"></script>
+
+  </head>
+  <body>
+    <div id="btnOk">点击确认</div>
+
+    <script>
+      RegExp.prototype.execAll = function (str) {
+        let map = {};
+        let result = null;
+        do {
+          result = this.exec(str);
+          if (result) map[result[1]] = result[2];
+        } while (this.lastIndex != 0);
+        return map;
+      };
+      Location.getSearch=function (url) {
+        if (!url) url = location.href;
+        let search = /([^&?#]+)=([^&?#]+)/g.execAll(url);
+        for (let key in search) {
+          if (Object.prototype.hasOwnProperty.call(search, key)) {
+            search[key] = window.encodeURIComponent(search[key]);
+          }
+        }
+        return search;
+      };
+
+      window.onload = () => {
+        document.querySelector('#btnOk').onclick = () => {
+          let saveName = 'wx_wx054de4175bc8fdc2';
+          let req = location.getSearch();
+          let wxInfo = localStorage.getItem(saveName);
+          if(wxInfo&&wxInfo.userInfo){
+            location.replace(req.redirect);
+            return;
+          }
+          var helper = new window.WechatHelper.default({ appId: 'wx054de4175bc8fdc2' });
+          var temp = helper.needAuth(true);
+          if(temp.needAuth){
+            location.replace(temp.url);
+          }else{
+            axios.get(`https://m.vuedata.cn/ndapp/wx/getUserInfo`,{
+              params:{
+                wxid:'testcalm',
+                code:temp.code
+              }
+            }).then((ret)=>{
+              debugger;
+              let userInfo = ret;
+              localStorage.setItem(saveName,userInfo)
+            })
+          }
+        };
+      };
+    </script>
+  </body>
+</html>
