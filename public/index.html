@@ -21,7 +21,7 @@
         } while (this.lastIndex != 0);
         return map;
       };
-      Location.getSearch=function (url) {
+      location.getSearch=function (url) {
         if (!url) url = location.href;
         let search = /([^&?#]+)=([^&?#]+)/g.execAll(url);
         for (let key in search) {
