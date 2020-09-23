@@ -34,5 +34,5 @@ export async function GET_WECHAT_SIGN(params={
   url:'',
 
 }) {
-  return GET_DEFAULT(HOST + '/jsApiSign', params);
+  return GET_DEFAULT(HOST + '/ndapp/wx/jsApiSign', params);
 }

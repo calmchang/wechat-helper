@@ -6845,7 +6845,7 @@ function _GET_WECHAT_SIGN() {
               wxid: 'testcalm',
               url: ''
             };
-            return _context5.abrupt("return", GET_DEFAULT(HOST + '/jsApiSign', params));
+            return _context5.abrupt("return", GET_DEFAULT(HOST + '/ndapp/wx/jsApiSign', params));
 
           case 2:
           case "end":
