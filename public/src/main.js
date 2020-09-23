@@ -102,7 +102,7 @@ class WechatHelper {
       spt.onload = async () => {
         let ret = await GET_WECHAT_SIGN({ wxid:options.wxid, url: location.href.split('#')[0] });
         
-        if (ret && ret.code == 1) {
+        if (ret) {
           console.log(`[wechat-helper]jsapi签名结果:${JSON.stringify(ret.data)}`);
           if (ret.data) {
             wx.ready(function () {
