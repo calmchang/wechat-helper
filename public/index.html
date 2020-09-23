@@ -11,11 +11,6 @@
     <script src="./node_modules/wechat-helper/lib/index.js"></script>
     <!-- <script src="./lib/index.js"></script> -->
     <script src="./node_modules/axios/dist/axios.min.js"></script>
-
-  </head>
-  <body>
-    <div id="btnOk">点击确认</div>
-
     <script>
       RegExp.prototype.execAll = function (str) {
         let map = {};
@@ -36,6 +31,13 @@
         }
         return search;
       };
+    </script>
+  </head>
+  <body>
+    <div id="btnOk">点击确认</div>
+
+    <script>
+      
 
       window.onload = () => {
         document.querySelector('#btnOk').onclick = () => {
