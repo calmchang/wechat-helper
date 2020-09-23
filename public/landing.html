@@ -21,7 +21,22 @@
         document.querySelector('#btnOk').onclick = () => {
           var helper = new window.WechatHelper.default({ appId: 'wx054de4175bc8fdc2' });
           helper.initJsApi({
-            
+            wxid:'testcalm',
+            success:()=>{
+              debugger;
+              helper.setShare({
+                title:'我的标题', // 分享标题
+                desc:'我的描述', // 分享描述
+                link:'https://m.vuedata.cn/', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                
+                success:()=>{
+                  debugger;
+                }
+              })
+            },
+            fail:()=>{
+              debugger;
+            }
           })
           
         };
