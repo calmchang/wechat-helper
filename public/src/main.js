@@ -104,7 +104,7 @@ class WechatHelper {
         
         if (ret) {
           console.log(`[wechat-helper]jsapi签名结果:${JSON.stringify(ret)}`);
-          wx.ready(function () {
+          wx.ready(()=> {
             console.log('[wechat-helper]jsapi wx ready');
             this.wxApiReady = true;
             let menuList = ['menuItem:share:qq', 'menuItem:share:weiboApp', 'menuItem:share:QZone'];
@@ -122,7 +122,7 @@ class WechatHelper {
             }
 
           });
-          wx.error(function (res) {
+          wx.error( (res)=> {
             console.log(`[wechat-helper]jsapi wx fail:${JSON.stringify(res)}`);
             if (options.fail) {
               options.fail('微信初始化失败:' + JSON.stringify(res));

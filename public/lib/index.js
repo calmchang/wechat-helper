@@ -7014,6 +7014,8 @@ var main_WechatHelper = /*#__PURE__*/function () {
   }, {
     key: "initJsApi",
     value: function initJsApi(options) {
+      var _this = this;
+
       var appId = this.appId;
 
       if (this.is_weixin()) {
@@ -7038,7 +7040,7 @@ var main_WechatHelper = /*#__PURE__*/function () {
                     console.log("[wechat-helper]jsapi\u7B7E\u540D\u7ED3\u679C:".concat(stringify_default()(ret)));
                     wx.ready(function () {
                       console.log('[wechat-helper]jsapi wx ready');
-                      this.wxApiReady = true;
+                      _this.wxApiReady = true;
                       var menuList = ['menuItem:share:qq', 'menuItem:share:weiboApp', 'menuItem:share:QZone'];
 
                       if (options && options.noTimeLine) {
@@ -7049,8 +7051,8 @@ var main_WechatHelper = /*#__PURE__*/function () {
                         menuList: menuList
                       });
 
-                      if (this.shareList && this.shareList.length > 0) {
-                        this.setShare(this.shareList.pop());
+                      if (_this.shareList && _this.shareList.length > 0) {
+                        _this.setShare(_this.shareList.pop());
                       }
 
                       if (options && options.success) {
