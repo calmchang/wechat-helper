@@ -66,7 +66,7 @@
               let userInfo = ret.data;
               localStorage.setItem(saveName,JSON.stringify({userInfo:userInfo}));
               if(req.redirect){
-                location.replace(req.redirect);
+                location.replace(decodeURIComponent(req.redirect));
               }
             })
           }
