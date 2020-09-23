@@ -7034,7 +7034,7 @@ var main_WechatHelper = /*#__PURE__*/function () {
                 case 2:
                   ret = _context3.sent;
 
-                  if (ret && ret.code == 1) {
+                  if (ret) {
                     console.log("[wechat-helper]jsapi\u7B7E\u540D\u7ED3\u679C:".concat(stringify_default()(ret.data)));
 
                     if (ret.data) {
