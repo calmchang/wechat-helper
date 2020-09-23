@@ -7026,54 +7026,49 @@ var main_WechatHelper = /*#__PURE__*/function () {
                   ret = _context3.sent;
 
                   if (ret) {
-                    console.log("[wechat-helper]jsapi\u7B7E\u540D\u7ED3\u679C:".concat(stringify_default()(ret.data)));
+                    console.log("[wechat-helper]jsapi\u7B7E\u540D\u7ED3\u679C:".concat(stringify_default()(ret)));
+                    wx.ready(function () {
+                      console.log('[wechat-helper]jsapi wx ready');
+                      this.wxApiReady = true;
+                      var menuList = ['menuItem:share:qq', 'menuItem:share:weiboApp', 'menuItem:share:QZone'];
 
-                    if (ret.data) {
-                      wx.ready(function () {
-                        console.log('[wechat-helper]jsapi wx ready');
-                        this.wxApiReady = true;
-                        var menuList = ['menuItem:share:qq', 'menuItem:share:weiboApp', 'menuItem:share:QZone'];
+                      if (options && options.noTimeLine) {
+                        menuList.push('menuItem:share:timeline');
+                      }
 
-                        if (options && options.noTimeLine) {
-                          menuList.push('menuItem:share:timeline');
-                        }
-
-                        wx.hideMenuItems({
-                          menuList: menuList
-                        });
-
-                        if (this.shareList && this.shareList.length > 0) {
-                          this.setShare(this.shareList.pop());
-                        }
-
-                        if (options && options.success) {
-                          options.success();
-                        }
+                      wx.hideMenuItems({
+                        menuList: menuList
                       });
-                      wx.error(function (res) {
-                        console.log("[wechat-helper]jsapi wx fail:".concat(stringify_default()(res)));
 
-                        if (options.fail) {
-                          options.fail('微信初始化失败:' + stringify_default()(res));
-                        }
-                      });
-                      wx.config({
-                        debug: false,
-                        // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-                        appId: appId,
-                        // 必填，公众号的唯一标识
-                        timestamp: ret.data.timestamp,
-                        // 必填，生成签名的时间戳
-                        nonceStr: ret.data.nonceStr,
-                        // 必填，生成签名的随机串
-                        signature: ret.data.signature,
-                        // 必填，签名
-                        jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData', 'onMenuShareAppMessage', 'onMenuShareTimeline', 'hideOptionMenu', 'hideMenuItems'] // 必填，需要使用的JS接口列表
+                      if (this.shareList && this.shareList.length > 0) {
+                        this.setShare(this.shareList.pop());
+                      }
 
-                      });
-                    } else {
-                      console.log('[wechat-helper]jsapi签名失败');
-                    }
+                      if (options && options.success) {
+                        options.success();
+                      }
+                    });
+                    wx.error(function (res) {
+                      console.log("[wechat-helper]jsapi wx fail:".concat(stringify_default()(res)));
+
+                      if (options.fail) {
+                        options.fail('微信初始化失败:' + stringify_default()(res));
+                      }
+                    });
+                    wx.config({
+                      debug: false,
+                      // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                      appId: appId,
+                      // 必填，公众号的唯一标识
+                      timestamp: ret.timestamp,
+                      // 必填，生成签名的时间戳
+                      nonceStr: ret.nonceStr,
+                      // 必填，生成签名的随机串
+                      signature: ret.signature,
+                      // 必填，签名
+                      jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData', 'onMenuShareAppMessage', 'onMenuShareTimeline', 'hideOptionMenu', 'hideMenuItems'] // 必填，需要使用的JS接口列表
+
+                    });
                   } else {
                     console.log('[wechat-helper]jsapi签名失败');
                   }
