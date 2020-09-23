@@ -15,9 +15,12 @@
   </head>
   <body>
     <div id="btnOk">点击确认</div>
-
+    <p id='log'></p>
     <script>
       window.onload = () => {
+        let saveName = 'wx_wx054de4175bc8fdc2';
+        let wxInfo = localStorage.getItem(saveName);
+        document.querySelector('#log').innerText=wxInfo;
         document.querySelector('#btnOk').onclick = () => {
           var helper = new window.WechatHelper.default({ appId: 'wx054de4175bc8fdc2' });
           helper.initJsApi({

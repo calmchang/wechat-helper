@@ -44,6 +44,9 @@
           let saveName = 'wx_wx054de4175bc8fdc2';
           let req = location.getSearch();
           let wxInfo = localStorage.getItem(saveName);
+          if(wxInfo){
+            wxInfo=JSON.parse(wxInfo);
+          }
           if(wxInfo&&wxInfo.userInfo){
             location.replace(req.redirect);
             return;
@@ -60,8 +63,11 @@
               }
             }).then((ret)=>{
               debugger;
-              let userInfo = ret;
-              localStorage.setItem(saveName,userInfo)
+              let userInfo = ret.data;
+              localStorage.setItem(saveName,JSON.stringify({userInfo:userInfo}));
+              if(req.redirect){
+                location.replace(req.redirect);
+              }
             })
           }
         };
