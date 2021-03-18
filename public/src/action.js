@@ -64,3 +64,8 @@ export async function GET_WECHAT_SIGN(params={
 }) {
   return GET_DEFAULT(HOST + '/ndapp/wx/jsApiSign', params);
 }
+
+
+export async function GET_USER_INFO(params={wxid:'',code:''}){
+  return GET_DEFAULT(HOST + '/ndapp/wx/getUserInfo', params);
+}

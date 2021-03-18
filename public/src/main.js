@@ -1,4 +1,4 @@
-import { GET_WECHAT_SIGN } from './action.js';
+import { GET_WECHAT_SIGN, GET_USER_INFO} from './action.js';
 // import './main.scss';
 
 RegExp.prototype.execAll = function (str) {
@@ -165,6 +165,16 @@ class WechatHelper {
       console.log('[wechat-helper]请在微信浏览器运行');
     }
     return { needAuth: false };
+  }
+
+  getUserInfo(code,callback){
+    return new Promise(async (res)=>{
+      let ret = await GET_USER_INFO({wxid:this.wxid,code:code});
+      if(callback){
+        callback(ret);
+      }
+      res(ret)
+    })
   }
 
   

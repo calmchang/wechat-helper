@@ -62,21 +62,11 @@
             location.replace(authInfo.url);
             return;
           }else{
-            var xhr = new XMLHttpRequest();
-            var onreadystatechange=function(){
-              if(xhr.readyState===4){
-                debugger;
-                if(xhr.status===200){
-                  console.log(xhr.response);
-                }
-              }
-            }
-            xhr.open('GET',`https://m.vuedata.cn/ndapp/wx/getUserInfo/?wxid=${helper.wxid}&code=${authInfo.code}`,true);
-            xhr.onreadystatechange=onreadystatechange;
-            xhr.send(null);
-          }
+            helper.getUserInfo(authInfo.code,(data)=>{
+              console.log(data);
+            });
         }
-        
+
         document.querySelector('#btnOk').onclick = () => {
           helper.setShare({
             title:'分享文案设置',
