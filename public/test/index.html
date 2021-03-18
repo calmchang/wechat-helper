@@ -7,10 +7,7 @@
       content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"
     />
     <title></title>
-    <!-- <link rel="stylesheet" type="text/css" href="lib/css/index.css" /> -->
-    <script src="./node_modules/wechat-helper/lib/index.js"></script>
-    <!-- <script src="./lib/index.js"></script> -->
-    <script src="./node_modules/axios/dist/axios.min.js"></script>
+    <script src="../lib/index.js"></script>
     <script>
       RegExp.prototype.execAll = function (str) {
         let map = {};
@@ -32,15 +29,48 @@
         return search;
       };
     </script>
+    <style>
+      button{
+        border:1px solid black;
+        padding:20px;
+      }
+      #log{
+        margin:10px;
+        padding:10px;
+        font-size:14px;
+        border:1px solid black;
+      }
+    </style>
   </head>
   <body>
-    <div id="btnOk">点击确认</div>
-
+    <button id="btnOk">设置分享文案</button>
+    <div id="log"></div>
     <script>
       
 
       window.onload = () => {
+        var wechatHelper =  window['wechat-helper'].default || window['wechat-helper'];
+        var helper = new wechatHelper({
+          wxid:'testcalm',
+          appId:'wx054de4175bc8fdc2'
+        });
+
         document.querySelector('#btnOk').onclick = () => {
+
+          helper.setShare({
+            title:'分享文案设置',
+            desc:'详情内容设置',
+            imgUrl:`${location.protocol}//${location.hostname}/review/wechat-helper/public/test/share.jpg`,
+            link:location.href,
+            success:()=>{
+              var log = document.querySelector('#log');
+              var html = log.innerHTML;
+              html += '<br/>设置完成'
+              log.innerHTML = html;
+            }
+          });
+
+          return;
           let saveName = 'wx_wx054de4175bc8fdc2';
           let req = location.getSearch();
           let wxInfo = localStorage.getItem(saveName);
