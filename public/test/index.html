@@ -57,7 +57,6 @@
         });
 
         document.querySelector('#btnAuth').onclick=()=>{
-
           let authInfo= helper.getAuth(true);
           if(authInfo.needAuth){
             location.replace(authInfo.url);
@@ -75,10 +74,10 @@
             xhr.open('GET',`https://m.vuedata.cn/ndapp/wx/getUserInfo/?wxid=${helper.wxid}&code=${authInfo.code}`,true);
             xhr.onreadystatechange=onreadystatechange;
             xhr.send(null);
-          
+          }
         }
+        
         document.querySelector('#btnOk').onclick = () => {
-          
           helper.setShare({
             title:'分享文案设置',
             desc:'详情内容设置',
@@ -90,11 +89,7 @@
               html += '<br/>设置完成'
               log.innerHTML = html;
             }
-          });
-
-          return;
-          
-        
+          });        
         };
       };
     </script>
