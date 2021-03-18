@@ -4478,9 +4478,9 @@ var main_WechatHelper = /*#__PURE__*/function () {
   }, {
     key: "getAuth",
     value: function getAuth(needHead) {
-      var req = this.getSearch();
-
       if (this.inWechat()) {
+        var req = this.getSearch();
+
         if (!req.code || !req.state || req.state != 'wxauthsuccess') {
           var wxAuth = this.toAuth(location.href, needHead);
           console.log("[wechat-helper]\u8FD8\u672A\u6388\u6743\uFF0C\u5373\u5C06\u524D\u5F80:".concat(wxAuth));

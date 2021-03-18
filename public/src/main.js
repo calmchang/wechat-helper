@@ -151,8 +151,8 @@ class WechatHelper {
   }
   
   getAuth(needHead) {
-    let req = this.getSearch();
     if(this.inWechat() ){
+      let req = this.getSearch();
       if ( !req.code || !req.state || req.state != 'wxauthsuccess') {
         let wxAuth = this.toAuth(location.href, needHead);
         console.log(`[wechat-helper]还未授权，即将前往:${wxAuth}`);
