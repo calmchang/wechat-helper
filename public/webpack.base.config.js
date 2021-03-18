@@ -3,7 +3,7 @@ const webpack = require('webpack');
 
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-// const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 let otherPlugins = [];
 let cssLoader = [];
@@ -31,7 +31,7 @@ module.exports = function ({ packageDist }) {
       chunkFilename: '[name].chunk.js',
       path: path.join(__dirname, packageDist),
       publicPath: '',
-      library: 'wechat-helper',
+      library: 'wechatHelper',
       libraryTarget: 'umd', // 'var', // 'commonjs2',  'umd',
       // libraryTarget: 'var', //  'umd',
     },
@@ -85,15 +85,15 @@ module.exports = function ({ packageDist }) {
       //     sourceMap: true,
       //     parallel: true,
       //     cache: true,
-      //     minify(file, sourceMap) {
-      //       let uglifyJsOptions = {};
-      //       if (sourceMap) {
-      //         uglifyJsOptions.sourceMap = {
-      //           content: sourceMap,
-      //         };
-      //       }
-      //       return require('terser').minify(file, uglifyJsOptions);
-      //     },
+      //     // minify(file, sourceMap) {
+      //     //   let uglifyJsOptions = {};
+      //     //   if (sourceMap) {
+      //     //     uglifyJsOptions.sourceMap = {
+      //     //       content: sourceMap,
+      //     //     };
+      //     //   }
+      //     //   return require('terser').minify(file, uglifyJsOptions);
+      //     // },
       //   }),
       // ],
     },
