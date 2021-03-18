@@ -1,5 +1,4 @@
 (function webpackUniversalModuleDefinition(root, factory) {
-  debugger;
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
 	else if(typeof define === 'function' && define.amd)
