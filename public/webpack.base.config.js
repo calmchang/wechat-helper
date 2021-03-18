@@ -58,7 +58,7 @@ module.exports = function ({ packageDist }) {
                     '@babel/preset-env',
                     {
                       targets: {
-                        chrome: '60',
+                        chrome: '40',
                         // ie: '11',
                       },
                     },
