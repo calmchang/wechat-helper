@@ -56,7 +56,7 @@
         });
 
         document.querySelector('#btnOk').onclick = () => {
-
+          
           helper.setShare({
             title:'分享文案设置',
             desc:'详情内容设置',
@@ -71,35 +71,36 @@
           });
 
           return;
-          let saveName = 'wx_wx054de4175bc8fdc2';
-          let req = location.getSearch();
-          let wxInfo = localStorage.getItem(saveName);
-          if(wxInfo){
-            wxInfo=JSON.parse(wxInfo);
-          }
-          if(wxInfo&&wxInfo.userInfo){
-            location.replace(req.redirect);
-            return;
-          }
-          var helper = new window.WechatHelper.default({ appId: 'wx054de4175bc8fdc2' });
-          var temp = helper.needAuth(true);
-          if(temp.needAuth){
-            location.replace(temp.url);
-          }else{
-            axios.get(`https://m.vuedata.cn/ndapp/wx/getUserInfo`,{
-              params:{
-                wxid:'testcalm',
-                code:temp.code
-              }
-            }).then((ret)=>{
-              debugger;
-              let userInfo = ret.data;
-              localStorage.setItem(saveName,JSON.stringify({userInfo:userInfo}));
-              if(req.redirect){
-                location.replace(decodeURIComponent(req.redirect));
-              }
-            })
-          }
+          // let saveName = 'wx_wx054de4175bc8fdc2';
+          // let req = location.getSearch();
+          // let wxInfo = localStorage.getItem(saveName);
+          // if(wxInfo){
+          //   wxInfo=JSON.parse(wxInfo);
+          // }
+          // if(wxInfo&&wxInfo.userInfo){
+          //   location.replace(req.redirect);
+          //   return;
+          // }
+          // var helper = new window.WechatHelper.default({ appId: 'wx054de4175bc8fdc2' });
+          // var temp = helper.needAuth(true);
+          // if(temp.needAuth){
+          //   location.replace(temp.url);
+          // }else{
+          //   axios.get(`https://m.vuedata.cn/ndapp/wx/getUserInfo`,{
+          //     params:{
+          //       wxid:'testcalm',
+          //       code:temp.code
+          //     }
+          //   }).then((ret)=>{
+          //     debugger;
+          //     let userInfo = ret.data;
+          //     localStorage.setItem(saveName,JSON.stringify({userInfo:userInfo}));
+          //     if(req.redirect){
+          //       location.replace(decodeURIComponent(req.redirect));
+          //     }
+          //   })
+          // }
+        
         };
       };
     </script>
