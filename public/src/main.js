@@ -29,7 +29,7 @@ class WechatHelper {
       'onMenuShareWeibo',
       'onMenuShareQZone'
     ];
-    this.init({wxid,appId,apis,hideMenuList,onSuccess,onFail,debug})
+    this.init({wxid,appId,apis:this.apis,hideMenuList,onSuccess,onFail,debug})
   }
 
   init(options) {

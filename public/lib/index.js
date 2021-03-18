@@ -4279,7 +4279,7 @@ var main_WechatHelper = /*#__PURE__*/function () {
     this.init({
       wxid: wxid,
       appId: appId,
-      apis: apis,
+      apis: this.apis,
       hideMenuList: hideMenuList,
       onSuccess: onSuccess,
       onFail: onFail,
