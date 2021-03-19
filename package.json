@@ -49,6 +49,11 @@
     "webpack-dev-server": "^3.10.3",
     "@purtuga/esm-webpack-plugin": "^1.5.0"
   },
+  "description": "提供快捷的微信分享及用户授权功能",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/calmchang/wechat-helper"
+  },
   "engines": {
     "node": ">=10.15.0",
     "npm": ">=6.13.4"
