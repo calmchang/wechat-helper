@@ -1,6 +1,6 @@
 {
-  "name": "wechatHelper",
-  "version": "1.0.0",
+  "name": "wechat-helper",
+  "version": "1.5.0",
   "main": "lib/index",
   "scripts": {
     "dev": "cross-env NODE_ENV=dev SERVER_ENV=dev webpack -w -p --progress --colors &  node webserver.js",
@@ -49,7 +49,6 @@
     "webpack-dev-server": "^3.10.3",
     "@purtuga/esm-webpack-plugin": "^1.5.0"
   },
-  "author": "changx",
   "engines": {
     "node": ">=10.15.0",
     "npm": ">=6.13.4"
