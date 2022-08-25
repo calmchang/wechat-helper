@@ -89,8 +89,8 @@
 
         document.querySelector('#btnOk').onclick = () => {
           wechatHelper.setShare({
-            title:'分享文案设置',
-            desc:'详情内容设置',
+            title:'标题'+Date.now(),
+            desc:'内容'+Date.now(),
             imgUrl:`${location.protocol}//${location.hostname}/review/wechatHelper/test/share.jpg`,
             link:location.href,
             success:()=>{
