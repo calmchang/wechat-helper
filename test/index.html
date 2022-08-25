@@ -81,9 +81,8 @@
             location.replace(authInfo.url);
             return;
           }else{
-            wechatHelper.getUserInfo(authInfo.code,(data)=>{
-              console.log(data);
-            });
+            let req = await wechatHelper.getUserInfo(authInfo.code);
+            console.log(req);
           }
         };
 
