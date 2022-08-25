@@ -1,4 +1,4 @@
-import { GET_WECHAT_SIGN, GET_USER_INFO} from './action.js';
+import {GET_DEFAULT} from './action.js';
 // import './main.scss';
 
 RegExp.prototype.execAll = function (str) {
@@ -11,12 +11,12 @@ RegExp.prototype.execAll = function (str) {
   return map;
 };
 
-class WechatHelper {
-  constructor(options) {
-    const {wxid,appId,apis,hideMenuList,onSuccess,onFail,debug} = options;
-    this.ver = '0.0.1';
-    this.wxid = wxid;
-    this.appId = appId;
+const WechatHelper= {
+  GET:GET_DEFAULT,
+  init:async function(options) {
+    const {apis,appId,hideMenuList,onSuccess,onFail,debug,apiGetUserInfo,apiSign} = options;
+    this.ver = '2.0.0';
+    this.appId = appId||'';
     this.wxApiReady = false;
     this.shareList = [];
     this.apis = apis||[
@@ -29,17 +29,29 @@ class WechatHelper {
       'onMenuShareWeibo',
       'onMenuShareQZone'
     ];
-    this.init({wxid,appId,apis:this.apis,hideMenuList,onSuccess,onFail,debug})
-  }
-
-  init(options) {
-    const {wxid,appId,apis,hideMenuList,onSuccess,onFail,debug=false} = options;
+    this.apiGetUserInfo = apiGetUserInfo;
+    this.apiSign = apiSign;
+    await this.initJsApi({apis:this.apis,hideMenuList,onSuccess,onFail,debug})
+    return true;
+  },
+  inWechat: function() {
+    let ua = navigator.userAgent.toLowerCase();
+    if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+      return true;
+    } else {
+      return false;
+    }
+  },
+  initJsApi:async function (options) {
+    const {apis,hideMenuList,onSuccess,onFail,debug=false} = options;
     if (this.inWechat()) {
       let spt = document.createElement('script');
       spt.type = 'text/javascript';
       spt.onload = async () => {
-        let ret = await GET_WECHAT_SIGN({ wxid:wxid, url: location.href.split('#')[0] });
-        
+        let ret;
+        if(apiSign){
+          ret = await this.apiSign(location.href.split('#')[0])
+        }
         if (ret) {
           console.log(`[wechat-helper]jsapi签名结果:${JSON.stringify(ret)}`);
           wx.ready(()=> {
@@ -64,9 +76,10 @@ class WechatHelper {
               onFail('微信初始化失败:' + JSON.stringify(res));
             }
           });
+          this.appId = ret.appId;
           wx.config({
             debug: debug, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-            appId: appId, // 必填，公众号的唯一标识
+            appId: ret.appId, // 必填，公众号的唯一标识
             timestamp: ret.timestamp, // 必填，生成签名的时间戳
             nonceStr: ret.nonceStr, // 必填，生成签名的随机串
             signature: ret.signature, // 必填，签名
@@ -82,9 +95,9 @@ class WechatHelper {
     }else{
       console.log('[wechat-helper]请到微信浏览器进行jsapi申请');
     }
-  }
+  },
 
-  setShare(options) {
+  setShare:function (options) {
     const { title, desc, link, imgUrl, success } = options;
     if (this.wxApiReady) {
       console.log(`[wechat-helper]设置分享内容:${JSON.stringify(options)}`);
@@ -113,9 +126,8 @@ class WechatHelper {
       this.shareList.pop();
       this.shareList.push(options);
     }
-  }
-
-  getSearch(url) {
+  },
+  getSearch:function (url) {
     if (!url) url = location.href;
     let search = /([^&?#]+)=([^&?#]+)/g.execAll(url);
     for (let key in search) {
@@ -124,22 +136,13 @@ class WechatHelper {
       }
     }
     return search;
-  }
-
-  inWechat() {
-    let ua = navigator.userAgent.toLowerCase();
-    if (ua.match(/MicroMessenger/i) == 'micromessenger') {
-      return true;
-    } else {
-      return false;
-    }
-  }
-  toRedirect() {
+  },
+  toRedirect:function() {
     let req = this.getSearch();
     console.log(`[wechat-helper]toRedirect跳转页面:${req.redirect}`);
     location.replace(req.redirect);
-  }
-  toAuth(url, needHead) {
+  },
+  toAuth:function(url, needHead) {
     const { appId } = this;
     let type = 'snsapi_base';
     if (needHead) {
@@ -148,9 +151,9 @@ class WechatHelper {
     let redirect_uri = window.encodeURIComponent(url);
     let wxAuth = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appId}&redirect_uri=${redirect_uri}&response_type=code&scope=${type}&state=wxauthsuccess#wechat_redirect`;
     return wxAuth;
-  }
+  },
   
-  getAuth(needHead) {
+  getAuth:function(needHead) {
     if(this.inWechat() ){
       let req = this.getSearch();
       if ( !req.code || !req.state || req.state != 'wxauthsuccess') {
@@ -165,19 +168,11 @@ class WechatHelper {
       console.log('[wechat-helper]请在微信浏览器运行');
     }
     return { needAuth: false };
+  },
+  getUserInfo:async function(code){
+    let ret = await this.apiGetUserInfo(code);
+    return ret;
   }
-
-  getUserInfo(code,callback){
-    return new Promise(async (res)=>{
-      let ret = await GET_USER_INFO({wxid:this.wxid,code:code});
-      if(callback){
-        callback(ret);
-      }
-      res(ret)
-    })
-  }
-
-  
 }
 
 export default WechatHelper;

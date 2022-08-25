@@ -51,18 +51,37 @@
 
       window.onload = () => {
         var wechatHelper =  window['wechatHelper'].default || window['wechatHelper'];
-        var helper = new wechatHelper({
-          wxid:'testcalm',
-          appId:'wx054de4175bc8fdc2'
-        });
+        wechatHelper.init({
+          apiSign:async (url)=>{
+            let req = await wechatHelper.GET('https://m.vuedata.cn/ndapp/wx/jsApiSign', {
+                url,
+                wxid:'testcalm'
+              
+            });
+            return {
+              appId:req.appId,
+              timestamp:req.timestamp,
+              nonceStr:req.nonceStr,
+              signature:req.signature,
+            };
+          },
+          apiGetUserInfo:async (code)=>{
+            let req = await wechatHelper.GET('https://m.vuedata.cn/ndapp/wx/getUserInfo', {
+                code,
+                wxid:'testcalm'
+              
+            });
+            return req;
+          },
+        })
 
         document.querySelector('#btnAuth').onclick=()=>{
-          let authInfo= helper.getAuth(true);
+          let authInfo= wechatHelper.getAuth(true);
           if(authInfo.needAuth){
             location.replace(authInfo.url);
             return;
           }else{
-            helper.getUserInfo(authInfo.code,(data)=>{
+            wechatHelper.getUserInfo(authInfo.code,(data)=>{
               console.log(data);
             });
           }
@@ -72,7 +91,7 @@
           helper.setShare({
             title:'分享文案设置',
             desc:'详情内容设置',
-            imgUrl:`${location.protocol}//${location.hostname}/review/wechat-helper/public/test/share.jpg`,
+            imgUrl:`${location.protocol}//${location.hostname}/review/wechatHelper/test/share.jpg`,
             link:location.href,
             success:()=>{
               var log = document.querySelector('#log');

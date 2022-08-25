@@ -1,6 +1,6 @@
 {
   "name": "wechat-helper",
-  "version": "1.5.2",
+  "version": "2.0.0",
   "main": "lib/index",
   "scripts": {
     "dev": "cross-env NODE_ENV=dev SERVER_ENV=dev webpack -w -p --progress --colors &  node webserver.js",

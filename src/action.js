@@ -2,7 +2,7 @@
 // import qs from 'qs';
 
 
-function GET_DEFAULT(url,params){
+export function GET_DEFAULT(url,params){
   return new Promise((res,rej)=>{
     var xhr = new XMLHttpRequest();
     var data=[];
@@ -56,16 +56,16 @@ async function GET_DEFAULT_CROSS(url, param) {
  *                  基础共享接口
  *************************************************************************/
 
-const HOST = 'https://m.vuedata.cn';
-export async function GET_WECHAT_SIGN(params={
-  wxid:'',
-  url:'',
+// const HOST = 'https://m.vuedata.cn';
+// export async function GET_WECHAT_SIGN(params={
+//   wxid:'',
+//   url:'',
 
-}) {
-  return GET_DEFAULT(HOST + '/ndapp/wx/jsApiSign', params);
-}
+// }) {
+//   return GET_DEFAULT(HOST + '/ndapp/wx/jsApiSign', params);
+// }
 
 
-export async function GET_USER_INFO(params={wxid:'',code:''}){
-  return GET_DEFAULT(HOST + '/ndapp/wx/getUserInfo', params);
-}
+// export async function GET_USER_INFO(params={wxid:'',code:''}){
+//   return GET_DEFAULT(HOST + '/ndapp/wx/getUserInfo', params);
+// }
