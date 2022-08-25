@@ -48,10 +48,7 @@ const WechatHelper= {
       let spt = document.createElement('script');
       spt.type = 'text/javascript';
       spt.onload = async () => {
-        let ret;
-        if(apiSign){
-          ret = await this.apiSign(location.href.split('#')[0])
-        }
+        let ret = await this.apiSign(location.href.split('#')[0])
         if (ret) {
           console.log(`[wechat-helper]jsapi签名结果:${JSON.stringify(ret)}`);
           wx.ready(()=> {
