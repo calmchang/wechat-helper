@@ -53,7 +53,7 @@
         var wechatHelper =  window['wechatHelper'].default || window['wechatHelper'];
         wechatHelper.init({
           apiSign:async (url)=>{
-            let req = await wechatHelper.GET('https://m.vuedata.cn/ndapp/wx/jsApiSign', {
+            let req = await wechatHelper.GET('https://m.yourapi.cn/ndapp/wx/jsApiSign', {
                 url,
                 wxid:'testcalm'
               
@@ -66,7 +66,7 @@
             };
           },
           apiGetUserInfo:async (code)=>{
-            let req = await wechatHelper.GET('https://m.vuedata.cn/ndapp/wx/getUserInfo', {
+            let req = await wechatHelper.GET('https://m.yourapi.cn/ndapp/wx/getUserInfo', {
                 code,
                 wxid:'testcalm'
               
