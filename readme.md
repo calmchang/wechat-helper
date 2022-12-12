@@ -1,5 +1,7 @@
 ## wechat-helper
 
+![Page Views Count](https://badges.toozhao.com/badges/01GM1ZE00DX1SXQGT2WDKJM2GG/green.svg)
+
 ![node](https://img.shields.io/badge/node-%3E%3D8-green) ![npm](https://img.shields.io/badge/npm-%3E%3D6.4.1-blue) ![umd](https://img.shields.io/badge/umd-support-brightgreen) ![esmodule](https://img.shields.io/badge/esmodule-support-brightgreen)
 
 ### install  
